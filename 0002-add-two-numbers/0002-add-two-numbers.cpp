@@ -15,26 +15,20 @@ public:
         ListNode* curr = dummy;
         int carry = 0;
 
-        ListNode* p1 = l1;
-        ListNode* p2 = l2;
-
-        while (p1 != nullptr || p2 != nullptr) {
-            int d1 = (p1 != nullptr) ? p1 -> val : 0;
-            int d2 = (p2 != nullptr) ? p2 -> val : 0;
+        while (l1 != nullptr || l2 != nullptr || carry) {
+            int d1 = (l1 != nullptr) ? l1->val : 0;
+            int d2 = (l2 != nullptr) ? l2->val : 0;
 
             int sum = d1 + d2 + carry;
-            int d3 = sum % 10;
             carry = sum / 10;
 
-            curr -> next = new ListNode(d3);
+            curr->next = new ListNode(sum % 10);
             curr = curr->next;
-            
-            if (p1 != nullptr) p1 = p1->next;
-            if (p2 != nullptr) p2 = p2->next;
+
+            if (l1 != nullptr) l1 = l1->next;
+            if (l2 != nullptr) l2 = l2->next;
         }
-        if (carry == 1) {
-            curr -> next = new ListNode(1);
-        }
-        return dummy -> next;
+
+        return dummy->next;
     }
 };
